@@ -13,14 +13,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
-
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/profile")
-@Api(value = "Profile api", description = "Everything about profile")
+@Api(value = "Profile api")
 public class RestProfileController {
     private final ProfileService profileService;
 
@@ -38,23 +34,14 @@ public class RestProfileController {
     @ApiOperation(value = "update profiles", notes = "return list profiles")
     @ApiResponses(
             value = {
-                    @ApiResponse(code = 200, message = "Update successfully")
+                    @ApiResponse(code = 200, message = "Update successfully"),
+                    @ApiResponse(code = 404, message = "Id can not be null")
             }
     )
+
     @PatchMapping("/")
     public ResponseEntity<List<ProfileResponse>> update(@RequestBody List<ProfileUpdateRequest> requests) {
         return ResponseEntity.ok(profileService.update(requests));
     }
 
-    @ApiOperation(value = "update profiles", notes = "return list profiles")
-    @ApiResponses(
-            value = {
-                    @ApiResponse(code = 200, message = "Update successfully"),
-                    @ApiResponse(code = 404, message = "Id can not be null")
-            }
-    )
-    @PatchMapping("/update")
-    public ResponseEntity<List<ProfileResponse>> patch(@RequestBody List<Map<Object,Object>> requests) {
-        return ResponseEntity.ok(profileService.patch(requests));
-    }
 }

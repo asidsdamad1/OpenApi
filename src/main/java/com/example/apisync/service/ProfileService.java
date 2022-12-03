@@ -7,7 +7,6 @@ import com.example.apisync.dto.response.ProfileResponse;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Map;
 
 @Service
 public interface ProfileService {
@@ -17,5 +16,4 @@ public interface ProfileService {
 
     List<ProfileResponse> save(List<ProfileRequest> requests);
 
-    List<ProfileResponse> patch(List<Map<Object,Object>> requests);
 }
